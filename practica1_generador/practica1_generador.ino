@@ -3,12 +3,12 @@ float dureza = 50;
 bool start;
 bool stop;
 int reset;
-int pin = 13;
+int pin = 12;
 String consola;
 
 
 void setup() {
-  Serial.println(">> ");
+  Serial.println(">>");
   Serial.begin(9600);
   pinMode(pin, OUTPUT);
 }
@@ -42,14 +42,14 @@ void loop() {
         stop = !start;
       } else if (consola.startsWith("RESET")){
         dureza = 50;
-        frecuencia = 2;
+        frecuencia = 1000;
       }
-     Serial.println(">> ");
+     Serial.println(">>");
   }
 
   if (start) {
     digitalWrite(pin, HIGH);
-    delay((1000*dureza)/(frecuencia*100));
+    micros((1000*dureza)/(frecuencia*100));
     digitalWrite(pin, LOW);
     delay((1000*(100-dureza))/(frecuencia*100));
   } else if (stop) {
